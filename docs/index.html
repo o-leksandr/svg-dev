@@ -1,0 +1,149 @@
+<!-- Generated using a neural network model DeepSeek-V3 -->
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            font-family: monospace;
+        }
+
+        .editor {
+            width: 50%;
+            padding: 20px;
+            background: #1e1e1e;
+        }
+
+        textarea {
+            width: 100%;
+            height: calc(100% - 40px);
+            background: #2d2d2d;
+            color: #ddd;
+            font-family: monospace;
+            font-size: 14px;
+            padding: 10px;
+            border: none;
+            resize: none;
+        }
+
+        button {
+            background: #0e639c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .preview {
+            width: 50%;
+            padding: 20px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .error {
+            color: #f48771;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="editor">
+
+        <h3 style="color: white;">SVG code</h3>
+
+        <textarea id="svgInput">
+
+            <svg viewBox="0 0 100 100" width="400" height="400">
+            <rect x="10" y="10" width="80" height="80" fill="#61afef" />
+            <circle cx="50" cy="50" r="30" fill="#98c379" />
+            <text x="50" y="55" text-anchor="middle" fill="white" font-size="12">SVG</text>
+            </svg>
+
+        </textarea>
+
+        <button onclick="renderSVG()">🔄 Refresh</button>
+
+        <div id="errorMsg" class="error"></div>
+
+    </div>
+
+    <div class="preview">
+
+        <div id="preview"></div>
+
+    </div>
+
+    <script>
+
+        function renderSVG() {
+
+            const svgCode = document.getElementById('svgInput').value;
+            const previewDiv = document.getElementById('preview');
+            const errorDiv = document.getElementById('errorMsg');
+
+            try {
+
+                errorDiv.textContent = '';
+
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = svgCode;
+
+                let svgElement = tempDiv.querySelector('svg');
+                if (!svgElement) {
+
+                    throw new Error('Not found <svg> element');
+
+                }
+
+                previewDiv.innerHTML = '';
+
+                const clonedSvg = svgElement.cloneNode(true);
+                previewDiv.appendChild(clonedSvg);
+
+                console.log('✓ SVG');
+
+            } catch (error) {
+
+                errorDiv.textContent = '❌ Error: ' + error.message;
+                console.error('Render error:', error);
+
+            }
+
+        }
+
+        renderSVG();
+
+        let timeout;
+
+        document.getElementById('svgInput').addEventListener('input', () => {
+
+            clearTimeout(timeout);
+            timeout = setTimeout(renderSVG, 500);
+
+        }
+
+        );
+
+    </script>
+
+</body>
+
+</html>
