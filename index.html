@@ -16,14 +16,14 @@
 
     <div class="editor">
 
-        <h3 style="color: white;">SVG code</h3>
-
         <textarea id="svgInput">
 
             <svg viewBox="0 0 100 100" width="400" height="400">
-            <rect x="10" y="10" width="80" height="80" fill="#61afef" />
-            <circle cx="50" cy="50" r="30" fill="#98c379" />
-            <text x="50" y="55" text-anchor="middle" fill="white" font-size="12">SVG</text>
+
+                <rect x="10" y="10" width="80" height="80" fill="#61afef" />
+                <circle cx="50" cy="50" r="30" fill="#98c379" />
+                <text x="50" y="55" text-anchor="middle" fill="white" font-size="12">SVG</text>
+
             </svg>
 
         </textarea>
@@ -40,59 +40,7 @@
 
     </div>
 
-    <script>
-
-        function renderSVG() {
-
-            const svgCode = document.getElementById('svgInput').value;
-            const previewDiv = document.getElementById('preview');
-            const errorDiv = document.getElementById('errorMsg');
-
-            try {
-
-                errorDiv.textContent = '';
-
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = svgCode;
-
-                let svgElement = tempDiv.querySelector('svg');
-                if (!svgElement) {
-
-                    throw new Error('Not found <svg> element');
-
-                }
-
-                previewDiv.innerHTML = '';
-
-                const clonedSvg = svgElement.cloneNode(true);
-                previewDiv.appendChild(clonedSvg);
-
-                console.log('✓ SVG');
-
-            } catch (error) {
-
-                errorDiv.textContent = '❌ Error: ' + error.message;
-                console.error('Render error:', error);
-
-            }
-
-        }
-
-        renderSVG();
-
-        let timeout;
-
-        document.getElementById('svgInput').addEventListener('input', () => {
-
-            clearTimeout(timeout);
-            timeout = setTimeout(renderSVG, 500);
-
-        }
-
-        );
-
-    </script>
-
+    <script src="script.js"></script>
 </body>
 
 </html>
