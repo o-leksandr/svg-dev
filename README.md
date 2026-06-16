@@ -1,4 +1,4 @@
 <!-- filename: ./README.md -->
-<!-- date: 14.06.2026 -->
+<!-- date: 16.06.2026 -->
 
-[svg-dev](https://o-leksandr.github.com/svg-dev)
+[svg-dev](https://o-leksandr.github.io/svg-dev)
